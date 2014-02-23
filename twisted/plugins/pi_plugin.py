@@ -1,6 +1,7 @@
 from zope.interface import implementer
 
-from twisted.application import strports
+from twisted.application.internet import StreamServerEndpointService
+from twisted.internet.endpoints import serverFromString
 from twisted.application.service import IServiceMaker
 from twisted.plugin import IPlugin
 from twisted.python import usage
@@ -20,7 +21,11 @@ class PiServiceMaker(object):
     options = Options
 
     def makeService(self, options):
-        return strports.service(options["port"], server.Site(PiResource()))
+        from twisted.internet import reactor
+        return StreamServerEndpointService(
+            endpoint=serverFromString(reactor, options["port"]),
+            factory=server.Site(PiResource()),
+        )
 
 
 serviceMaker = PiServiceMaker()
