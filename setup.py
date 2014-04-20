@@ -28,10 +28,12 @@ setup(
     author="Julian Berman",
     author_email="Julian@GrayVines.com",
     classifiers=classifiers,
-    description="",
+    description="The glue holding together my Pi web service",
     license="MIT",
     long_description=long_description,
     url="https://github.com/Julian/PiPy",
+    include_package_data=True,
+    zip_safe=False,
 )
 
 

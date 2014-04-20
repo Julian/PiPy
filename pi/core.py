@@ -1,9 +1,9 @@
-from twisted.web import resource
+import os
+
+from twisted.web import static
 
 
-class PiResource(resource.Resource):
-
-    isLeaf = True
-
-    def render_GET(self, request):
-        return "<h2>Hello World!</h2>"
+def create_resource():
+    return static.File(
+        os.path.join(os.path.dirname(__file__), "static"),
+    )
