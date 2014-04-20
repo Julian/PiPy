@@ -1,9 +1,13 @@
 import os
 
-from twisted.web import static
+from klein import Klein
+from twisted.web.static import File
 
 
-def create_resource():
-    return static.File(
-        os.path.join(os.path.dirname(__file__), "static"),
-    )
+STATIC_DIR = os.path.join(os.path.dirname(__file__), "static")
+app = Klein()
+
+
+@app.route("/", branch=True)
+def static(request):
+    return File(STATIC_DIR)

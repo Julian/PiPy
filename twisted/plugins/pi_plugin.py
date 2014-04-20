@@ -7,7 +7,7 @@ from twisted.plugin import IPlugin
 from twisted.python import usage
 from twisted.web import server
 
-from pi.core import create_resource
+from pi.core import app
 
 
 class Options(usage.Options):
@@ -24,7 +24,7 @@ class PiServiceMaker(object):
         from twisted.internet import reactor
         return StreamServerEndpointService(
             endpoint=serverFromString(reactor, options["port"]),
-            factory=server.Site(create_resource()),
+            factory=server.Site(app.resource()),
         )
 
 
