@@ -7,7 +7,7 @@ from twisted.plugin import IPlugin
 from twisted.python import usage
 from twisted.web import server
 
-from pi.core import app
+from pi.views import app
 
 
 class Options(usage.Options):
