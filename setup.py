@@ -32,7 +32,7 @@ setup(
     license="MIT",
     long_description=long_description,
     url="https://github.com/Julian/PiPy",
-    install_requires=["Klein", "Twisted"],
+    install_requires=["klein", "pyopenssl", "treq", "twisted"],
     include_package_data=True,
     zip_safe=False,
 )
