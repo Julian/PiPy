@@ -11,7 +11,10 @@ from pi.core import Pi
 
 
 class Options(usage.Options):
-    optParameters = [["port", "p", "A strports port to run on"]]
+    optParameters = [
+        ["audience", "The audience (domain) to use for Persona verification"],
+        ["port", "p", "A strports port to run on"],
+    ]
 
 
 @implementer(IPlugin, IServiceMaker)
@@ -23,7 +26,7 @@ class PiServiceMaker(object):
     def makeService(self, options):
         from twisted.internet import reactor
         endpoint = serverFromString(reactor, options["port"])
-        pi = Pi()
+        pi = Pi(audience=options["audience"])
         return StreamServerEndpointService(
             endpoint=endpoint, factory=server.Site(pi.app.resource()),
         )

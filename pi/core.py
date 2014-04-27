@@ -15,17 +15,14 @@ class Pi(object):
 
     app = Klein()
 
-    def __init__(self):
-        self.authenticator = Authenticator()
+    def __init__(self, audience):
+        self.authenticator = Authenticator(audience=audience)
 
     @app.route("/auth/login", methods=["POST"])
     def login(self, request):
-        audience = "{0.scheme}://{0.netloc}".format(request.URLPath())
-
+        assertion = request.args.get("assertion")
         try:
-            response = self.authenticator.authenticate(
-                assertion=request.args.get("assertion"), audience=audience,
-            )
+            response = self.authenticator.authenticate(assertion=assertion)
         except AuthenticationError:
             request.setResponseCode(204)
             return

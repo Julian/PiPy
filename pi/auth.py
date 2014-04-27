@@ -25,10 +25,13 @@ class Authenticator(object):
 
     """
 
-    def __init__(self, verifier="https://verifier.login.persona.org/verify"):
+    def __init__(
+        self, audience, verifier="https://verifier.login.persona.org/verify",
+    ):
+        self.audience = audience
         self.verifier = verifier
 
-    def authenticate(self, assertion, audience):
+    def authenticate(self, assertion):
         """
         Try to authenticate the given assertion with the verifier.
 
@@ -37,7 +40,8 @@ class Authenticator(object):
         if assertion is None:
             raise MissingAssertion()
         return treq.post(
-            self.verifier, data=dict(assertion=assertion, audience=audience),
+            self.verifier,
+            data=dict(assertion=assertion, audience=self.audience),
         ).addCallback(treq.json_content).addCallback(self._received_response)
 
     def _received_response(self, response):
