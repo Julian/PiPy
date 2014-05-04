@@ -6,7 +6,7 @@ var signOutButton = document.getElementById('signout');
 if (signOutButton) {
   signOutButton.onclick = function() { navigator.id.logout(); };
 }
-$.ajax({url: '/auth/status', success: loggedIn, error: loggedOut});
+$.ajax({url: '/auth/status', success: toggleLoginButtons});
 
 
 var currentUser = 'Julian@GrayVines.com'
@@ -35,11 +35,13 @@ navigator.id.watch({
 });
 
 
+function toggleLoginButtons() {
+    $("#signin").toggle();
+    $("#signout").toggle();
+}
 function loggedIn(res, status, xhr) {
-    $("#signin").hide();
-    $("#signout").show();
+    toggleLoginButtons();
 }
 function loggedOut(res, status, xhr) {
-    $("#signin").show();
-    $("#signout").hide();
+    toggleLoginButtons();
 }
