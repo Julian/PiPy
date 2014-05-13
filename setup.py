@@ -35,7 +35,7 @@ setup(
     install_requires=[
         "klein",
         "pyopenssl",
-        "service_identity,"
+        "service_identity",
         "treq",
         "twisted",
     ],
