@@ -1,7 +1,7 @@
 from klein import Klein
 from twisted.python.components import registerAdapter
 from twisted.python.filepath import FilePath
-from twisted.web.server import Session
+from twisted.web.server import Session, Site
 from twisted.web.static import File
 from zope.interface import Interface, Attribute, implementer
 
@@ -15,8 +15,18 @@ class Pi(object):
 
     app = Klein()
 
-    def __init__(self, audience):
-        self.authenticator = Authenticator(audience=audience)
+    def __init__(self):
+        self.authenticator = Authenticator()
+
+    def site(self, displayTracebacks=True, **kwargs):
+        """
+        A :twisted:`web.server.Site` that will serve me.
+
+        """
+
+        site = Site(self.app.resource(), **kwargs)
+        site.displayTracebacks = displayTracebacks
+        return site
 
     @app.route("/auth/login", methods=["POST"])
     def login(self, request):
