@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 import os
 
 from distutils import log
@@ -17,14 +18,14 @@ classifiers = [
     "Programming Language :: Python :: 2.7",
     "Programming Language :: Python :: 2",
     "Programming Language :: Python :: Implementation :: CPython",
-    "Programming Language :: Python :: Implementation :: PyPy"
+    "Programming Language :: Python :: Implementation :: PyPy",
 ]
 
 setup(
     name="pi",
     version=__version__,
     packages=["pi", "twisted.plugins"],
-    package_data={"twisted" : ["plugins/pi_plugin.py"]},
+    package_data={"twisted": ["plugins/pi_plugin.py"]},
     author="Julian Berman",
     author_email="Julian@GrayVines.com",
     classifiers=classifiers,

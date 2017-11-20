@@ -2,7 +2,6 @@ from twisted.application.strports import service
 from twisted.python import usage
 
 from pi.core import Pi
-from pi.utils import Redirect, argparseToOptions
 
 
 class Options(usage.Options):
