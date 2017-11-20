@@ -5,8 +5,6 @@ from twisted.web.server import Session, Site
 from twisted.web.static import File
 from zope.interface import Interface, Attribute, implementer
 
-from pi.auth import Authenticator, AuthenticationError
-
 
 STATIC_DIR = FilePath(__file__).sibling("static")
 
@@ -14,9 +12,6 @@ STATIC_DIR = FilePath(__file__).sibling("static")
 class Pi(object):
 
     app = Klein()
-
-    def __init__(self):
-        self.authenticator = Authenticator()
 
     def site(self, displayTracebacks=True, **kwargs):
         """
